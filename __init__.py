@@ -23,6 +23,7 @@
 
 """Import scripts."""
 
+import button
 import label
 import textbox
 import widget

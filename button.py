@@ -45,7 +45,6 @@ class Button(widget.Widget):
 		
 		self.onClickCallback = onClickCallback
 		self.callbackArgs = callbackArgs
-		self.confirmKeys = list(confirmKeys) # don't make python's list argument's default value
 		if fontFace is None:
 			fontFace=pygame.font.match_font("freesans,sansserif,microsoftsansserif,arial,dejavusans,verdana,timesnewroman,helvetica")
 		if fontFace is None:
