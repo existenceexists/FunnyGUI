@@ -21,7 +21,12 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
-class TextBox(pygame.sprite.Sprite):
+import pygame
+
+import widget
+
+
+class TextBox(widget.Widget):
 	def __init__(
 			self,
 			width=200,
@@ -35,22 +40,20 @@ class TextBox(pygame.sprite.Sprite):
 			textHighlightedColor=(255,0,0), 
 			textPositionX=22):
 		
-		pygame.sprite.Sprite.__init__(self)
-		self.focused = 0
-		self.highlighted = 0
-		self.dirty = 1
+		widget.Widget.__init__(self)
+		self.focused = False
+		self.highlighted = False
+		self.dirty = True
 		self.backspaceKeys = list(backspaceKeys)
 		
 		self.textNormalColor = textNormalColor
 		self.textFocusedColor = textFocusedColor
 		self.textHighlightedColor = textHighlightedColor
 		
-		if (fontFace is None):
-                        fontFilename = pygame.font.match_font("freesans,sansserif,microsoftsansserif,arial,dejavusans,verdana,timesnewroman,helvetica", bold=False)
-                        if fontFilename is None:
-				allAvailableFonts = pygame.font.get_fonts()
-				fontFilename = pygame.font.match_font(allAvailableFonts[0])
-			fontFace = fontFilename
+		if fontFace is None:
+			fontFace=pygame.font.match_font("freesans,sansserif,microsoftsansserif,arial,dejavusans,verdana,timesnewroman,helvetica")
+		if fontFace is None:
+			fontFace=pygame.font.match_font(pygame.font.get_fonts()[0])
 		self.font = pygame.font.Font(fontFace, fontSize)
 		linesize = self.font.get_linesize()
 		
@@ -83,11 +86,22 @@ class TextBox(pygame.sprite.Sprite):
 			#(self.rect.height - linesize)//2 + 3)
 			(self.rect.height - linesize)//2)
 
-	#----------------------------------------------------------------------
 	def update(self, event):
-		if not self.dirty:
-			return
+                if event.type=pygame.MOUSEMOTION:
+			self.OnMouseMove(event.pos)
+                elif event.type=pygame.MOUSEBUTTONDOWN:
+                	self.OnMouseClick(event.pos)
+                elif event.type=pygame.KEYDOWN:
+                	self.OnKeyPressed(event)
+		if self.dirty:
+			self.CreateImage()
+			self.dirty=False
+			return self.rect
 
+	def draw(self,surface):
+		surface.blit(self.image,self.rect)
+
+	def CreateImage(self):
 		text = self.text
 		if self.focused:
 			text += '|'
@@ -102,27 +116,22 @@ class TextBox(pygame.sprite.Sprite):
 		#if (size[0] > (self.rect.width - self.textDefaultPosition[0] - 20)):
 		#if (size[0] > (self.rect.width - self.textDefaultPosition[0] - 22)):
 		if (size[0] > (self.rect.width - 2*self.textDefaultPosition[0])):
-			textPosition[0] = (
-				(self.rect.width - self.textDefaultPosition[0]) - size[0])
+			textPosition[0] = ((self.rect.width - self.textDefaultPosition[0]) - size[0])
 
 		textImg = self.font.render(text, 1, color)
 		self.image.blit(self.emptyImg, (0,0))
 		#self.image.blit(textImg, self.textPos)
 		self.image.blit(textImg, textPosition)
 
-		self.dirty = 0
-
-	#----------------------------------------------------------------------
 	def Click(self):
-		self.focused = 1
-		self.SetDirty(1)
+		self.focused=True
+		self.SetDirty(True)
 		if (not self.container is None):
-			self.container.SetFocus(1)
+			self.container.SetFocus(True)
 
-	#----------------------------------------------------------------------
 	def SetText(self, newText):
 		self.text = newText
-		self.SetDirty(1)
+		self.SetDirty(True)
 		"""
 		if ((not self.container is None) and (not self.container.container is None)):
 			print self.container, self.container.dirty
@@ -130,12 +139,9 @@ class TextBox(pygame.sprite.Sprite):
 			print "self.container.dirty = 1"
 		"""
 
-	#----------------------------------------------------------------------
 	def GetText(self):
 		return self.text
 
-
-	#----------------------------------------------------------------------
 	def OnKeyPressed(self, event):
 		if self.focused:
 			if event.key in self.backspaceKeys:
@@ -148,7 +154,6 @@ class TextBox(pygame.sprite.Sprite):
 			self.SetText(newText)
 			return True
 
-	#----------------------------------------------------------------------
 	def OnMetaPressed(self, event):
 		if self.focused and event.key in self.focusCycleKeys:
 			#don't respond to the focus cycle keys
@@ -159,23 +164,21 @@ class TextBox(pygame.sprite.Sprite):
 			self.SetText(newText)
 			return True
 
-	#----------------------------------------------------------------------
 	def OnMouseClick(self, pos):
 		if self.rect.collidepoint(pos):
 			self.Click()
 			#print "textBox.OnMouseClick-if collidepoint,", pos
 			return True
 		elif self.focused:
-			self.SetFocus(0)
+			self.SetFocus(False)
 			#print "textBox.OnMouseClick-elif focused,", pos
 			return True
 
-	#----------------------------------------------------------------------
 	def OnMouseMove(self, pos):
 		if self.rect.collidepoint(pos):
 			if not self.highlighted:
-				self.SetHoverHighlight(1)
+				self.SetHoverHighlight(True)
 				return True
 		elif self.highlighted:
-			self.SetHoverHighlight(0)
+			self.SetHoverHighlight(False)
 			return True

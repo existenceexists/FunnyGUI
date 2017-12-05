@@ -28,14 +28,21 @@ import widget
 
 class Label(widget.Widget):
 	def __init__(
-			self, text, fontFace=None, fontSize=14,
-			color=(200,200,200), backgroundColor=None, container=None):
+			self, 
+			text, 
+			fontFace=None, 
+			fontSize=14,
+			color=(200,200,200), 
+			backgroundColor=None, 
+			container=None):
 		widget.Widget.__init__(self, container)
 
 		self.color = color
 		self.backgroundColor = backgroundColor
 		if fontFace is None:
-			fontFace = utils.getFontFilename()
+			fontFace=pygame.font.match_font("freesans,sansserif,microsoftsansserif,arial,dejavusans,verdana,timesnewroman,helvetica")
+		if fontFace is None:
+			fontFace=pygame.font.match_font(pygame.font.get_fonts()[0])
 		self.font = pygame.font.Font(fontFace, fontSize)
 		self.__text = text
 		self.createImage()
@@ -43,11 +50,12 @@ class Label(widget.Widget):
 	def update(self,event):
 		if not self.dirty:
 			return
-		self.dirty = 0
+		self.dirty=False
+
+	def draw(self,surface):
+		surface.blit(self.image,self.rect)
 
 	def SetText(self, text):
-		""" The rect must be placed with i.e. somelabel.rect.move_ip(...)
-		after each call to this method."""
 		position = self.rect.topleft
 		self.__text = text
 		self.SetDirty(1)
@@ -55,11 +63,10 @@ class Label(widget.Widget):
 		self.rect.move_ip(position)
 
 	def createImage(self):
-		if self.backgroundColor is None :
+		if self.backgroundColor is None:# transparent background
 			self.image = self.font.render(self.__text, 1, self.color)
 		else :
-			self.image = self.font.render(self.__text, 1, self.color,
-				self.backgroundColor)
+			self.image = self.font.render(self.__text, 1, self.color,self.backgroundColor)
 		self.rect  = self.image.get_rect()
 
     

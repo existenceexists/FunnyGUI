@@ -40,17 +40,17 @@ class Widget(pygame.sprite.Sprite):
 
 	def SetFocus(self, val):
 		self.focused = val
-		self.SetDirty(1)
+		self.SetDirty(True)
 
  	def SetHoverHighlight(self, value):
 		self.highlighted = value
-		self.SetDirty(1)
+		self.SetDirty(True)
 
- 	def OnGetFocus(self, event):
-		self.SetFocus(1)
+ 	def OnGetFocus(self):
+		self.SetFocus(True)
 
- 	def OnLoseFocus(self, event):
-		self.SetFocus(0)
+ 	def OnLoseFocus(self):
+		self.SetFocus(False)
 
  	def SetDirty(self, value):
 		self.dirty = value
