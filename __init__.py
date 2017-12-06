@@ -24,6 +24,7 @@
 """Import scripts."""
 
 import button
+import inputbox
 import label
-import textbox
 import widget
+import window

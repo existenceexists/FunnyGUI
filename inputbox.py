@@ -26,7 +26,7 @@ import pygame
 import widget
 
 
-class TextBox(widget.Widget):
+class InputBox(widget.Widget):
 	def __init__(
 			self,
 			width=200,
