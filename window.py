@@ -41,7 +41,6 @@ class Window(widget.Widget):
 		for widget in self.widgets:
 			widget.update(event)
 		if self.dirty:
-			self.SetDirty(True)# this is in case this instance is conained within another container
 			self.dirty=False
 			self.ChangeImage()
 			return self.rect
