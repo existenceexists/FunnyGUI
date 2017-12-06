@@ -38,8 +38,16 @@ class Window(widget.Widget):
 		self.CreateImage(width,height,backgroundColor)
 
 	def update(self,event):
+		newEvent=event
+		if hasattr(event,"pos"):
+			eventDict=dict(event.dict)
+			pos=list(eventDict["pos"])
+			pos[0]=pos[0]-self.rect.x
+			pos[1]=pos[1]-self.rect.y
+			eventDict["pos"]=pos
+			newEvent=pygame.event.Event(event.type,eventDict)
 		for widget in self.widgets:
-			widget.update(event)
+			widget.update(newEvent)
 		if self.dirty:
 			self.dirty=False
 			self.ChangeImage()
