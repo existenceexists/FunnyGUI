@@ -87,11 +87,11 @@ class TextBox(widget.Widget):
 			(self.rect.height - linesize)//2)
 
 	def update(self, event):
-                if event.type=pygame.MOUSEMOTION:
+                if event.type==pygame.MOUSEMOTION:
 			self.OnMouseMove(event.pos)
-                elif event.type=pygame.MOUSEBUTTONDOWN:
+                elif event.type==pygame.MOUSEBUTTONDOWN:
                 	self.OnMouseClick(event.pos)
-                elif event.type=pygame.KEYDOWN:
+                elif event.type==pygame.KEYDOWN:
                 	self.OnKeyPressed(event)
 		if self.dirty:
 			self.CreateImage()
