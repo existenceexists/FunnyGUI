@@ -1,36 +1,63 @@
-    This file is part of FunnyGUI.
-    FunnyGUI is widget toolkit for pygame.
-    Copyright (C) 2017 František Brožka
-    email: sentientfanda@gmail.com
+FunnyGUI:
+=========
 
-    This program is free software: you can redistribute it and/or modify
-    it under the terms of the GNU General Public License as published by
-    the Free Software Foundation, either version 3 of the License, or
-    (at your option) any later version.
 
-    This program is distributed in the hope that it will be useful,
-    but WITHOUT ANY WARRANTY; without even the implied warranty of
-    MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
-    GNU General Public License for more details.
+Description:
+------------
+FunnyGUI is a widget toolkit for pygame.
+Ease of use has been the main target of this project.
+See section Usage for more good news.
 
-    You should have received a copy of the GNU General Public License
-    along with this program.  If not, see <http://www.gnu.org/licenses/>.
 
 Usage:
 ------
-FunnyGUI is a normal Python package and should be used this way.
-Modul Pygame is required to be installed as it is a dependency.
+
+The good news is that:
+Every widget class in this library 
+is derived from class pygame.sprite.Sprite
+and should be used the same way.
+I.e. create it using it's constructor 
+e.g. widget=FunnyGui.button.Button("OK") 
+then position it with 
+e.g. widget.rect.move_ip(100,100) 
+then draw it with 
+e.g. widget.draw(screen) 
+then wait for user event and when one occurs then update it with 
+e.g. widget.update(event) 
+and then redraw it with 
+e.g. widget.draw(screen) 
+and so on.
+This is good news because this is the correct way 
+to handle a graphic component. 
+Updating widget with event is here separated 
+from drawing widget.
+
 See and run example.py for example of usage.
+
+Code of this library is small and simple so you can try to read it.
+
+FunnyGUI is a normal Python package and should be used this way.
+
+Modul Pygame is required to be installed.
+
 
 Website:
 --------
 https://github.com/existenceexists/FunnyGUI
 
+
 Contact:
 --------
 sentientfanda@gmail.com
 
+
 Notes:
 ------
-Based on Poutine by Shandy Brown in 2005.
+Based on project Poutine by Shandy Brown in 2005.
+
+
+License:
+--------
+GNU General Public License version 3
+Copyright (C) 2017 František Brožka
 
