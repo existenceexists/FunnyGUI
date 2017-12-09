@@ -64,7 +64,7 @@ class Button(widget.Widget):
 	def update(self,event):
                 if event.type==pygame.MOUSEMOTION:
 			self.OnMouseMove(event.pos)
-                elif event.type==pygame.MOUSEBUTTONDOWN:
+                elif event.type==pygame.MOUSEBUTTONUP:
                 	self.OnMouseClick(event.pos)
 		if self.dirty:
 			self.ChangeImage()
