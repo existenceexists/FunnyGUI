@@ -21,19 +21,21 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+from __future__ import absolute_import
+
 import pygame
 
-import widget
+import FunnyGUI.widget
 
 
-class Window(widget.Widget):
+class Window(FunnyGUI.widget.Widget):
 	def __init__(
 			self,
 			container=None,
 			width=500,
 			height=500,
 			backgroundColor=None): # if background color is None the area will be transparent
-		widget.Widget.__init__(self,container)
+		FunnyGUI.widget.Widget.__init__(self,container)
 		self.widgets=[]
 		self.CreateImage(width,height,backgroundColor)
 
@@ -60,7 +62,7 @@ class Window(widget.Widget):
 		widget.container=self
 		self.widgets.append(widget)
 		self.ChangeImage()
-                self.SetDirty(True)
+		self.SetDirty(True)
 
 	def CreateImage(self,width,height,backgroundColor):
 		"""Create image of the window widget without contained widgets."""

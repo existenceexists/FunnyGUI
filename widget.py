@@ -21,38 +21,39 @@
     along with this program.  If not, see <http://www.gnu.org/licenses/>.
 """
 
+from __future__ import absolute_import
+
 import pygame
 
 
 class Widget(pygame.sprite.Sprite):
-	def __init__(self, container=None):
+	def __init__(self,container=None):
 		pygame.sprite.Sprite.__init__(self)
+		self.container=container
+		self.focused=False
+		self.highlighted=False
+		self.dirty=True
 
-		self.container = container
-		self.focused = 0
-		self.highlighted = 0
-		self.dirty = 1
-
- 	def Destroy(self):
-		self.container = None
+	def Destroy(self):
+		self.container=None
 		del self.container
 		pygame.sprite.Sprite.kill(self)
 
-	def SetFocus(self, val):
-		self.focused = val
+	def SetFocus(self,value):
+		self.focused=value
 		self.SetDirty(True)
 
- 	def SetHoverHighlight(self, value):
-		self.highlighted = value
+	def SetHoverHighlight(self,value):
+		self.highlighted=value
 		self.SetDirty(True)
 
- 	def OnGetFocus(self):
+	def OnGetFocus(self):
 		self.SetFocus(True)
 
- 	def OnLoseFocus(self):
+	def OnLoseFocus(self):
 		self.SetFocus(False)
 
- 	def SetDirty(self, value):
-		self.dirty = value
+	def SetDirty(self,value):
+		self.dirty=value
 		if not self.container is None:
 			self.container.SetDirty(value)

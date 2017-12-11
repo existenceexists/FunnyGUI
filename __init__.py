@@ -1,6 +1,8 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+from __future__ import absolute_import
+
 """
     This file is part of FunnyGUI.
     FunnyGUI is widget toolkit for pygame.
@@ -23,8 +25,8 @@
 
 """Import scripts."""
 
-import button
-import inputbox
-import label
-import widget
-import window
+import FunnyGUI.button
+import FunnyGUI.inputbox
+import FunnyGUI.label
+import FunnyGUI.widget
+import FunnyGUI.window
