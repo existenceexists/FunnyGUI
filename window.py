@@ -59,6 +59,8 @@ class Window(widget.Widget):
 	def add(self,widget):
 		widget.container=self
 		self.widgets.append(widget)
+		self.ChangeImage()
+                self.SetDirty(True)
 
 	def CreateImage(self,width,height,backgroundColor):
 		"""Create image of the window widget without contained widgets."""
