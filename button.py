@@ -25,10 +25,10 @@ from __future__ import absolute_import
 
 import pygame
 
-import FunnyGUI.widget
+from . import widget
 
 
-class Button(FunnyGUI.widget.Widget):
+class Button(widget.Widget):
 	def __init__(
 			self,
 			text,
@@ -43,7 +43,7 @@ class Button(FunnyGUI.widget.Widget):
 			focusedBackgroundColor=None,
 			onClickCallback=None,
 			callbackArgs=()):
-		FunnyGUI.widget.Widget.__init__(self,container)
+		widget.Widget.__init__(self,container)
 		self.onClickCallback=onClickCallback
 		self.callbackArgs=callbackArgs
 		if fontFace is None:

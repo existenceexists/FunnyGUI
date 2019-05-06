@@ -25,10 +25,10 @@ from __future__ import absolute_import
 
 import pygame
 
-import FunnyGUI.widget
+from . import widget
 
 
-class InputBox(FunnyGUI.widget.Widget):
+class InputBox(widget.Widget):
 	def __init__(
 			self,
 			width=200,
@@ -42,7 +42,7 @@ class InputBox(FunnyGUI.widget.Widget):
 			textFocusedColor=(255,255,0),
 			textHighlightedColor=(255,0,0),
 			textPositionX=22):
-		FunnyGUI.widget.Widget.__init__(self)
+		widget.Widget.__init__(self)
 		self.focused=False
 		self.highlighted=False
 		self.dirty=True

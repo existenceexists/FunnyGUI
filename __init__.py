@@ -25,8 +25,9 @@ from __future__ import absolute_import
 
 """Import scripts."""
 
-import FunnyGUI.button
-import FunnyGUI.inputbox
-import FunnyGUI.label
-import FunnyGUI.widget
-import FunnyGUI.window
+from . import button
+from . import inputbox
+from . import label
+from . import scrollbar
+from . import widget
+from . import window

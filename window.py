@@ -25,17 +25,17 @@ from __future__ import absolute_import
 
 import pygame
 
-import FunnyGUI.widget
+from . import widget
 
 
-class Window(FunnyGUI.widget.Widget):
+class Window(widget.Widget):
 	def __init__(
 			self,
 			container=None,
 			width=500,
 			height=500,
 			backgroundColor=None): # if background color is None the area will be transparent
-		FunnyGUI.widget.Widget.__init__(self,container)
+		widget.Widget.__init__(self,container)
 		self.widgets=[]
 		self.CreateImage(width,height,backgroundColor)
 

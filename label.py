@@ -25,10 +25,10 @@ from __future__ import absolute_import
 
 import pygame
 
-import FunnyGUI.widget
+from . import widget
 
 
-class Label(FunnyGUI.widget.Widget):
+class Label(widget.Widget):
 	def __init__(
 			self,
 			text,
@@ -37,7 +37,7 @@ class Label(FunnyGUI.widget.Widget):
 			color=(200,200,200),
 			backgroundColor=None,
 			container=None):
-		FunnyGUI.widget.Widget.__init__(self,container)
+		widget.Widget.__init__(self,container)
 		self.color=color
 		self.backgroundColor=backgroundColor
 		if fontFace is None:
